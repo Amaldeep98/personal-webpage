@@ -38,6 +38,8 @@
             line-height: 1.7;
             letter-spacing: 0.5px;
             cursor: none; /* Hide default cursor */
+            -webkit-tap-highlight-color: transparent; /* Remove tap highlight on mobile */
+            touch-action: pan-y; /* Allow vertical scrolling */
         }
 
         /* Custom Cursor - Jupiter Style */
@@ -52,6 +54,7 @@
             transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            display: block; /* Ensure visible on touch devices */
         }
 
         .cursor-ring {
@@ -65,6 +68,7 @@
             transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s;
             animation: rotateRing 3s linear infinite;
+            display: block; /* Ensure visible on touch devices */
         }
 
         .cursor-ring::before {
@@ -1151,10 +1155,63 @@
         let mouseY = 0;
         let ringX = 0;
         let ringY = 0;
+        let isTouching = false;
+        let touchStartY = 0;
+        let touchStartX = 0;
+        let scrollStartY = 0;
+        let isScrolling = false;
 
+        // Mouse events
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+        });
+
+        // Touch events for mobile devices
+        document.addEventListener('touchstart', (e) => {
+            isTouching = true;
+            isScrolling = false;
+            const touch = e.touches[0];
+            touchStartX = touch.clientX;
+            touchStartY = touch.clientY;
+            scrollStartY = window.scrollY;
+            mouseX = touch.clientX;
+            mouseY = touch.clientY;
+            // Show cursor on touch
+            cursor.style.display = 'block';
+            cursorRing.style.display = 'block';
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isTouching) return;
+            
+            const touch = e.touches[0];
+            const currentY = touch.clientY;
+            const currentX = touch.clientX;
+            const deltaY = Math.abs(currentY - touchStartY);
+            const deltaX = Math.abs(currentX - touchStartX);
+            const scrollDelta = Math.abs(window.scrollY - scrollStartY);
+
+            // Determine if user is scrolling (vertical movement > horizontal movement and scroll changed)
+            if (scrollDelta > 5 || (deltaY > 10 && deltaY > deltaX * 1.5)) {
+                isScrolling = true;
+                // Keep cursor at touch point relative to viewport while scrolling
+                mouseX = currentX;
+                mouseY = currentY;
+            } else {
+                // User is moving finger, not scrolling
+                isScrolling = false;
+                mouseX = currentX;
+                mouseY = currentY;
+            }
+        });
+
+        document.addEventListener('touchend', (e) => {
+            isTouching = false;
+            isScrolling = false;
+            // Optionally hide cursor after touch ends (or keep it visible)
+            // cursor.style.display = 'none';
+            // cursorRing.style.display = 'none';
         });
 
         // Smooth cursor animation
@@ -1163,9 +1220,10 @@
             cursor.style.left = mouseX + 'px';
             cursor.style.top = mouseY + 'px';
 
-            // Smooth following for ring
-            ringX += (mouseX - ringX) * 0.1;
-            ringY += (mouseY - ringY) * 0.1;
+            // Smooth following for ring (less smooth on touch for better responsiveness)
+            const smoothness = isTouching ? 0.3 : 0.1;
+            ringX += (mouseX - ringX) * smoothness;
+            ringY += (mouseY - ringY) * smoothness;
             cursorRing.style.left = ringX + 'px';
             cursorRing.style.top = ringY + 'px';
 
