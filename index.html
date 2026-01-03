@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AMAL DEEP - DevOps Engineer</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='glow' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff' stop-opacity='1'/%3E%3Cstop offset='100%25' stop-color='%23cccccc' stop-opacity='0.8'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='200' fill='%23000000'/%3E%3Ctext x='50%25' y='50%25' font-family='Arial Black, Arial, sans-serif' font-size='72' font-weight='900' fill='url(%23glow)' text-anchor='middle' dominant-baseline='central' letter-spacing='10' stroke='%23ffffff' stroke-width='0.5'%3EAMAL%3C/text%3E%3C/svg%3E">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
         
@@ -14,19 +15,19 @@
         }
 
         :root {
-            --primary: #0a0a0a;
-            --secondary: #1a1a1a;
-            --tertiary: #0d1117;
-            --accent: #00d4ff;
-            --accent-secondary: #ff006e;
-            --accent-gradient: linear-gradient(135deg, #00d4ff, #0099cc, #ff006e);
-            --accent-gradient-alt: linear-gradient(45deg, #ff006e, #8338ec, #3a86ff);
+            --primary: #000000;
+            --secondary: #0a0a0a;
+            --tertiary: #111111;
+            --accent: #ffffff;
+            --accent-secondary: #cccccc;
+            --accent-gradient: linear-gradient(135deg, #ffffff, #cccccc, #999999);
+            --accent-gradient-alt: linear-gradient(45deg, #ffffff, #888888, #666666);
             --text: #ffffff;
-            --text-muted: #8b949e;
-            --text-dim: #6e7681;
-            --card-bg: rgba(13, 17, 23, 0.9);
-            --border: rgba(48, 54, 61, 0.5);
-            --glow: rgba(0, 212, 255, 0.4);
+            --text-muted: #aaaaaa;
+            --text-dim: #888888;
+            --card-bg: rgba(20, 20, 20, 0.9);
+            --border: rgba(100, 100, 100, 0.3);
+            --glow: rgba(255, 255, 255, 0.3);
         }
 
         body {
@@ -36,6 +37,66 @@
             overflow-x: hidden;
             line-height: 1.7;
             letter-spacing: 0.5px;
+            cursor: none; /* Hide default cursor */
+        }
+
+        /* Custom Cursor - Jupiter Style */
+        .custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s;
+            animation: rotateRing 3s linear infinite;
+        }
+
+        .cursor-ring::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes rotateRing {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        .custom-cursor.hover {
+            width: 30px;
+            height: 30px;
+        }
+
+        .cursor-ring.hover {
+            width: 60px;
+            height: 60px;
         }
 
         /* Animated Background */
@@ -46,9 +107,39 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: linear-gradient(45deg, #0a0a0a, #1a1a1a, #0f0f1a);
+            background: linear-gradient(45deg, #000000, #0a0a0a, #050505);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
+        }
+
+        /* Space stars background */
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 60% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 33% 80%, white, transparent),
+                radial-gradient(1px 1px at 15% 50%, white, transparent),
+                radial-gradient(2px 2px at 75% 40%, white, transparent),
+                radial-gradient(1px 1px at 40% 20%, white, transparent),
+                radial-gradient(1px 1px at 25% 90%, white, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            opacity: 0.4;
+            animation: twinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
         }
 
         .bg-particles {
@@ -62,12 +153,12 @@
 
         .particle {
             position: absolute;
-            width: 3px;
-            height: 3px;
-            background: var(--accent);
+            width: 2px;
+            height: 2px;
+            background: white;
             border-radius: 50%;
             animation: float 20s infinite linear;
-            box-shadow: 0 0 6px var(--accent);
+            box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
         }
 
         @keyframes gradientShift {
@@ -91,14 +182,14 @@
             z-index: 1000;
             padding: 1rem 2rem;
             backdrop-filter: blur(20px);
-            background: rgba(10, 10, 10, 0.8);
+            background: rgba(0, 0, 0, 0.8);
             border-bottom: 1px solid var(--border);
             transition: all 0.3s ease;
         }
 
         nav.scrolled {
-            background: rgba(10, 10, 10, 0.95);
-            box-shadow: 0 5px 30px rgba(0, 212, 255, 0.1);
+            background: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 30px rgba(255, 255, 255, 0.1);
         }
 
         .nav-container {
@@ -271,7 +362,7 @@
 
         .cta-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
         }
 
         .cta-button::before {
@@ -399,9 +490,102 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
             margin: 3rem 0;
+        }
+
+        /* Cloud Providers Section */
+        .cloud-providers {
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .cloud-providers h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .cloud-providers h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+
+        .providers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .provider-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .provider-card:nth-child(1) { animation-delay: 0.2s; }
+        .provider-card:nth-child(2) { animation-delay: 0.4s; }
+        .provider-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .provider-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .provider-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .provider-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        .provider-name {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .provider-tagline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
         }
 
         .stat-item {
@@ -415,7 +599,7 @@
 
         .stat-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
         }
 
         .stat-number {
@@ -483,7 +667,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.03) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
             opacity: 0;
             transition: opacity 0.4s ease;
         }
@@ -499,7 +683,7 @@
         .skill-card:hover {
             transform: translateY(-15px) scale(1.02);
             border-color: var(--accent);
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2), 0 0 100px rgba(0, 212, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2), 0 0 100px rgba(255, 255, 255, 0.1);
         }
 
         .skill-icon {
@@ -511,7 +695,7 @@
             background-clip: text;
             display: block;
             text-align: center;
-            filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
         }
 
         .skill-card h3 {
@@ -539,108 +723,14 @@
         }
 
         .tool-tag {
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--accent);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
             font-size: 0.8rem;
-            border: 1px solid rgba(0, 212, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            border: 1px solid var(--border);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
-            position: relative;
-        }
-
-        .project-card:nth-child(1) { animation-delay: 0.2s; }
-        .project-card:nth-child(2) { animation-delay: 0.4s; }
-        .project-card:nth-child(3) { animation-delay: 0.6s; }
-
-        .project-card:hover {
-            transform: translateY(-15px) scale(1.03);
-            box-shadow: 0 25px 60px rgba(0, 212, 255, 0.3);
-        }
-
-        .project-image {
-            height: 250px;
-            background: var(--accent-gradient);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s;
-        }
-
-        .project-card:hover .project-image::before {
-            left: 100%;
-        }
-
-        .project-content {
-            padding: 2.5rem;
-        }
-
-        .project-content h3 {
-            font-family: 'Rajdhani', sans-serif;
-            color: var(--accent);
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-
-        .project-content p {
-            color: var(--text-muted);
-            line-height: 1.7;
-            margin-bottom: 2rem;
-            font-size: 1rem;
-        }
-
-        .project-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .tag {
-            background: rgba(0, 212, 255, 0.1);
-            color: var(--accent);
-            padding: 0.4rem 1rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(0, 212, 255, 0.3);
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            text-transform: uppercase;
         }
 
         /* Contact Section */
@@ -677,7 +767,7 @@
         }
 
         .contact:hover {
-            box-shadow: 0 20px 50px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(255, 255, 255, 0.2);
         }
 
         .contact h2 {
@@ -716,11 +806,11 @@
             align-items: center;
             gap: 0.8rem;
             padding: 1.2rem 2rem;
-            background: rgba(0, 212, 255, 0.1);
+            background: rgba(255, 255, 255, 0.1);
             color: var(--accent);
             text-decoration: none;
             border-radius: 50px;
-            border: 1px solid rgba(0, 212, 255, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             transition: all 0.3s ease;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
@@ -749,7 +839,7 @@
         .contact-link:hover {
             color: var(--primary);
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.4);
         }
 
         /* Animations */
@@ -782,6 +872,41 @@
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
             40% { transform: translateX(-50%) translateY(-10px); }
             60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Shooting Star */
+        .shooting-star {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 15px white, 0 0 30px white, 0 0 45px rgba(255, 255, 255, 0.8);
+            z-index: 100;
+            pointer-events: none;
+        }
+
+        .shooting-star::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), white, rgba(255, 255, 255, 0.8), transparent);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 15px white, 0 0 30px rgba(255, 255, 255, 0.6);
+        }
+
+        @keyframes shootStar {
+            0% {
+                top: -10px;
+                right: -10px;
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
         }
 
         /* Responsive */
@@ -818,12 +943,12 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .skills-grid {
+
+            .providers-grid {
                 grid-template-columns: 1fr;
             }
             
-            .projects-grid {
+            .skills-grid {
                 grid-template-columns: 1fr;
             }
             
@@ -843,18 +968,20 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: var(--accent-gradient);
+            background: linear-gradient(135deg, #ffffff, #888888);
             border-radius: 5px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: var(--accent);
+            background: #ffffff;
         }
     </style>
 </head>
 <body>
     <div class="animated-bg"></div>
     <div class="bg-particles" id="particles"></div>
+    <div class="custom-cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
 
     <nav id="navbar">
         <div class="nav-container">
@@ -863,7 +990,6 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -884,15 +1010,11 @@
             <div class="about-image">AD</div>
             <div class="about-text">
                 <h3>Who I Am</h3>
-                <p>I'm a passionate DevOps Engineer with 1 years of experience in building and scaling cloud infrastructure, automating CI/CD pipelines, and optimizing system performance for global enterprises.</p>
+                <p>I'm a passionate DevOps Engineer specializing in building and scaling cloud infrastructure, automating CI/CD pipelines, and optimizing system performance for global enterprises.</p>
                 <p>My expertise lies in bridging the gap between development and operations, ensuring robust, secure, and efficient systems that empower businesses to innovate rapidly.</p>
             </div>
         </div>
         <div class="stats-grid">
-            <div class="stat-item">
-                <span class="stat-number">1</span>
-                <span class="stat-label">Years Experience</span>
-            </div>
             <div class="stat-item">
                 <span class="stat-number">20+</span>
                 <span class="stat-label">Projects Completed</span>
@@ -900,6 +1022,24 @@
             <div class="stat-item">
                 <span class="stat-number">20+</span>
                 <span class="stat-label">Tools</span>
+            </div>
+        </div>
+
+        <div class="cloud-providers">
+            <h3>Cloud Infrastructure Partners</h3>
+            <div class="providers-grid">
+                <div class="provider-card">
+                    <div class="provider-name">AWS</div>
+                    <div class="provider-tagline">Amazon Web Services</div>
+                </div>
+                <div class="provider-card">
+                    <div class="provider-name">Civo</div>
+                    <div class="provider-tagline">Kubernetes-Native Cloud</div>
+                </div>
+                <div class="provider-card">
+                    <div class="provider-name">DigitalOcean</div>
+                    <div class="provider-tagline">Developer Cloud Platform</div>
+                </div>
             </div>
         </div>
     </section>
@@ -913,8 +1053,8 @@
                 <p>Expertise in architecting and managing cloud infrastructure for scalability and reliability.</p>
                 <div class="skill-tools">
                     <span class="tool-tag">AWS</span>
-                    <span class="tool-tag">Azure</span>
-                    <span class="tool-tag">GCP</span>
+                    <span class="tool-tag">Civo</span>
+                    <span class="tool-tag">Digital Ocean</span>
                 </div>
             </div>
             <div class="skill-card">
@@ -923,8 +1063,7 @@
                 <p>Building robust pipelines for seamless code integration and deployment.</p>
                 <div class="skill-tools">
                     <span class="tool-tag">Jenkins</span>
-                    <span class="tool-tag">GitLab CI</span>
-                    <span class="tool-tag">CircleCI</span>
+                    <span class="tool-tag">Github Actions</span>
                 </div>
             </div>
             <div class="skill-card">
@@ -944,7 +1083,7 @@
                 <div class="skill-tools">
                     <span class="tool-tag">Prometheus</span>
                     <span class="tool-tag">Grafana</span>
-                    <span class="tool-tag">ELK Stack</span>
+                    <span class="tool-tag">Loki</span>
                 </div>
             </div>
             <div class="skill-card">
@@ -963,50 +1102,7 @@
                 <p>Ensuring secure and compliant cloud environments.</p>
                 <div class="skill-tools">
                     <span class="tool-tag">IAM</span>
-                    <span class="tool-tag">Vault</span>
-                    <span class="tool-tag">AWS Security Hub</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="projects" class="section">
-        <h2>Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-image">📈</div>
-                <div class="project-content">
-                    <h3>Scalable E-Commerce Platform</h3>
-                    <p>Architected a highly available e-commerce platform using AWS ECS, RDS, and Elasticache, handling 100K+ daily users.</p>
-                    <div class="project-tags">
-                        <span class="tag">AWS</span>
-                        <span class="tag">Docker</span>
-                        <span class="tag">Terraform</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image">🚀</div>
-                <div class="project-content">
-                    <h3>Kubernetes Migration</h3>
-                    <p>Led migration of monolithic application to Kubernetes, reducing infrastructure costs by 35%.</p>
-                    <div class="project-tags">
-                        <span class="tag">Kubernetes</span>
-                        <span class="tag">Helm</span>
-                        <span class="tag">Azure</span>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-image">🔍</div>
-                <div class="project-content">
-                    <h3>Monitoring Dashboard</h3>
-                    <p>Developed a real-time monitoring dashboard with Prometheus, Grafana, and ELK Stack for system performance insights.</p>
-                    <div class="project-tags">
-                        <span class="tag">Prometheus</span>
-                        <span class="tag">Grafana</span>
-                        <span class="tag">ELK</span>
-                    </div>
+                    <span class="tool-tag">HashiCorp Vault</span>
                 </div>
             </div>
         </div>
@@ -1047,6 +1143,145 @@
             particle.style.animationDuration = `${15 + Math.random() * 10}s`;
             particlesContainer.appendChild(particle);
         }
+
+        // Custom Cursor - Jupiter Style
+        const cursor = document.getElementById('cursor');
+        const cursorRing = document.getElementById('cursorRing');
+        let mouseX = 0;
+        let mouseY = 0;
+        let ringX = 0;
+        let ringY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // Smooth cursor animation
+        function animateCursor() {
+            // Direct positioning for cursor dot
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
+
+            // Smooth following for ring
+            ringX += (mouseX - ringX) * 0.1;
+            ringY += (mouseY - ringY) * 0.1;
+            cursorRing.style.left = ringX + 'px';
+            cursorRing.style.top = ringY + 'px';
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effects
+        const hoverElements = document.querySelectorAll('a, button, .cta-button, .contact-link, .skill-card, .project-card');
+        hoverElements.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursorRing.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursorRing.classList.remove('hover');
+            });
+        });
+
+        // Shooting Star Animation
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            // Random end position on the left side (different vertical positions)
+            // End position: left side, random top position between 20% and 80% of viewport height
+            const endTopPercent = Math.random() * 60 + 20; // 20% to 80% of viewport height
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const endTopPx = (endTopPercent / 100) * viewportHeight;
+            
+            // Starting from top-right corner (using left positioning for smooth animation)
+            const startLeft = viewportWidth;
+            const startTop = 0;
+            
+            // End at left side (off-screen)
+            const endLeft = -200;
+            const endTop = endTopPx;
+            
+            // Calculate the distance and angle for trail rotation
+            const deltaX = endLeft - startLeft; // Negative value (moving left)
+            const deltaY = endTop - startTop;
+            const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+            
+            // Set initial position explicitly
+            star.style.position = 'fixed';
+            star.style.top = startTop + 'px';
+            star.style.left = startLeft + 'px';
+            star.style.right = 'auto';
+            star.style.opacity = '1';
+            
+            // Apply trail rotation directly to the star
+            const trailElement = document.createElement('style');
+            const uniqueId = `star-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            star.classList.add(uniqueId);
+            trailElement.textContent = `
+                .${uniqueId}::before {
+                    transform: translate(-50%, -50%) rotate(${angle}deg) !important;
+                }
+            `;
+            document.head.appendChild(trailElement);
+            
+            // Slower speed: 3-4 seconds duration
+            const duration = 3 + Math.random(); // 3-4 seconds
+            
+            // Create keyframe animation using only left and top (no right/left conflict)
+            const animationName = `shootStar-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ${animationName} {
+                    0% {
+                        top: ${startTop}px;
+                        left: ${startLeft}px;
+                        opacity: 1;
+                    }
+                    100% {
+                        top: ${endTop}px;
+                        left: ${endLeft}px;
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            star.style.animation = `${animationName} ${duration}s linear forwards`;
+            document.body.appendChild(star);
+
+            // Remove star and styles after animation completes
+            setTimeout(() => {
+                if (star.parentNode) {
+                    star.parentNode.removeChild(star);
+                }
+                if (style.parentNode) {
+                    style.parentNode.removeChild(style);
+                }
+                if (trailElement.parentNode) {
+                    trailElement.parentNode.removeChild(trailElement);
+                }
+            }, duration * 1000);
+        }
+
+        // Create shooting stars at longer intervals (every 10-15 seconds)
+        function scheduleNextStar() {
+            const delay = Math.random() * 5000 + 10000; // 10-15 seconds
+            setTimeout(() => {
+                createShootingStar();
+                scheduleNextStar(); // Schedule the next one
+            }, delay);
+        }
+
+        // Start shooting stars after initial delay
+        setTimeout(() => {
+            createShootingStar();
+            scheduleNextStar();
+        }, Math.random() * 3000 + 5000); // First star after 5-8 seconds
     </script>
 </body>
 </html>
