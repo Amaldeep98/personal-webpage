@@ -54,7 +54,8 @@
             transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            display: block; /* Ensure visible on touch devices */
+            display: block;
+            opacity: 0; /* Hidden initially, shown after first interaction */
         }
 
         .cursor-ring {
@@ -68,7 +69,18 @@
             transform: translate(-50%, -50%);
             transition: width 0.2s, height 0.2s;
             animation: rotateRing 3s linear infinite;
-            display: block; /* Ensure visible on touch devices */
+            display: block;
+            opacity: 0; /* Hidden initially, shown after first interaction */
+        }
+
+        /* Show cursor on desktop (mouse devices) */
+        @media (hover: hover) and (pointer: fine) {
+            .custom-cursor {
+                opacity: 1;
+            }
+            .cursor-ring {
+                opacity: 1;
+            }
         }
 
         .cursor-ring::before {
@@ -279,6 +291,7 @@
             justify-content: center;
             text-align: center;
             position: relative;
+            padding-top: 80px; /* Account for fixed navigation bar */
         }
 
         .hero-content {
@@ -915,8 +928,15 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hero {
+                padding-top: 100px; /* Extra padding on mobile to prevent nav overlap */
+                min-height: calc(100vh - 80px);
+            }
+            
             .hero h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
+                line-height: 1.2;
+                margin-bottom: 1rem;
             }
             
             .hero .subtitle {
@@ -927,8 +947,20 @@
                 font-size: 1.1rem;
             }
             
+            .hero-content {
+                padding: 1rem;
+            }
+            
             .nav-links {
                 display: none;
+            }
+            
+            nav {
+                padding: 0.8rem 1rem; /* Reduce nav padding on mobile */
+            }
+            
+            .logo {
+                font-size: 1.4rem; /* Smaller logo on mobile */
             }
             
             .section {
@@ -1151,20 +1183,30 @@
         // Custom Cursor - Jupiter Style
         const cursor = document.getElementById('cursor');
         const cursorRing = document.getElementById('cursorRing');
-        let mouseX = 0;
-        let mouseY = 0;
-        let ringX = 0;
-        let ringY = 0;
+        let mouseX = window.innerWidth / 2; // Start at center instead of 0,0
+        let mouseY = window.innerHeight / 2;
+        let ringX = mouseX;
+        let ringY = mouseY;
         let isTouching = false;
         let touchStartY = 0;
         let touchStartX = 0;
         let scrollStartY = 0;
         let isScrolling = false;
+        let hasInteracted = false; // Track if user has interacted
+
+        // Detect if device has mouse (desktop) or is touch-only
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const hasMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
         // Mouse events
         document.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
+            if (!hasInteracted) {
+                hasInteracted = true;
+                cursor.style.opacity = '1';
+                cursorRing.style.opacity = '1';
+            }
         });
 
         // Touch events for mobile devices
@@ -1177,7 +1219,15 @@
             scrollStartY = window.scrollY;
             mouseX = touch.clientX;
             mouseY = touch.clientY;
-            // Show cursor on touch
+            ringX = touch.clientX;
+            ringY = touch.clientY;
+            
+            // Show cursor on touch with fade-in
+            if (!hasInteracted) {
+                hasInteracted = true;
+            }
+            cursor.style.opacity = '1';
+            cursorRing.style.opacity = '1';
             cursor.style.display = 'block';
             cursorRing.style.display = 'block';
         });
@@ -1209,9 +1259,10 @@
         document.addEventListener('touchend', (e) => {
             isTouching = false;
             isScrolling = false;
-            // Optionally hide cursor after touch ends (or keep it visible)
-            // cursor.style.display = 'none';
-            // cursorRing.style.display = 'none';
+            // Keep cursor visible but fade it slightly after touch ends
+            // Or keep it fully visible - user preference
+            // cursor.style.opacity = '0.5';
+            // cursorRing.style.opacity = '0.5';
         });
 
         // Smooth cursor animation
@@ -1229,6 +1280,13 @@
 
             requestAnimationFrame(animateCursor);
         }
+        
+        // Initialize cursor position to center of screen (not top-left)
+        cursor.style.left = mouseX + 'px';
+        cursor.style.top = mouseY + 'px';
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+        
         animateCursor();
 
         // Hover effects
